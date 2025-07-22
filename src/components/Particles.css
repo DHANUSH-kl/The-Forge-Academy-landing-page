@@ -1,0 +1,8 @@
+.particles-container {
+  position: absolute; /* Ensure it is positioned absolutely */
+  top: 0;            /* Start from the top */
+  left: 0;           /* Start from the left */
+  width: 100%;       /* Full width */
+  height: 100%;      /* Full height */
+  z-index: -1;      /* Behind other content */
+}

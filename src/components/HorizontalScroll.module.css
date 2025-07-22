@@ -1,0 +1,43 @@
+/* components/HorizontalScroll.module.css */
+.container {
+  display: flex;
+  width: 100vw; /* Changed from max-content to 100vw */
+  height: 100vh;
+  background: #000;
+  align-items: center;
+  padding: 0 10vw;
+  gap: 4rem;
+  overflow-x: hidden; /* Explicitly hide horizontal overflow */
+  overflow-y: visible; /* Allow vertical overflow if needed */
+  position: relative; /* Add positioning context */
+}
+
+.cardWrapper {
+  flex-shrink: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  width: 380px; /* Set explicit width to match card */
+}
+
+.card {
+  width: 380px;
+  height: 480px;
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 5vw;
+    gap: 2rem;
+  }
+  
+  .cardWrapper {
+    width: 300px; /* Match mobile card width */
+  }
+  
+  .card {
+    width: 300px;
+    height: 400px;
+  }
+}

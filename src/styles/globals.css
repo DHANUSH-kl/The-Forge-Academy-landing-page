@@ -9,7 +9,19 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0, 0, 0;
+  --electric-indigo: #00B4FF;
+  --gradient-purple: #8B5CF6; /* Added complementary purple */
 }
+
+/* Add gradient text utility */
+.gradient-text-hover:hover {
+  background: linear-gradient(45deg, var(--electric-indigo), var(--gradient-purple));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  transition: all 0.5s ease;
+}
+
 
 body {
   color: rgb(var(--foreground-rgb));

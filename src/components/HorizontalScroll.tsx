@@ -4,18 +4,28 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Card from './Card';
 import styles from './HorizontalScroll.module.css';
+
 gsap.registerPlugin(ScrollTrigger);
+
 export default function HorizontalScroll() {
   const containerRef = useRef<HTMLDivElement>(null);
   const cardsRef = useRef<(HTMLDivElement | null)[]>([]);
+
+  // Create a callback ref function that matches the correct type
+  const setCardRef = (index: number) => (el: HTMLDivElement | null) => {
+    cardsRef.current[index] = el;
+  };
+
   useEffect(() => {
     const ctx = gsap.context(() => {
       if (!containerRef.current) return;
+      
       // Filter out any null refs
       const cards = cardsRef.current.filter(Boolean) as HTMLDivElement[];
+      
       // Horizontal scroll animation
       gsap.to(cards, {
-        xPercent: -100 * (cards.length - 1),
+        xPercent: -100 * (cards.length - 1.5),
         ease: "power1.out",
         scrollTrigger: {
           trigger: containerRef.current,
@@ -25,6 +35,7 @@ export default function HorizontalScroll() {
           anticipatePin: 1
         }
       });
+
       // Card entrance animations
       cards.forEach((card, i) => {
         gsap.from(card, {
@@ -34,14 +45,16 @@ export default function HorizontalScroll() {
           delay: i * 0.1,
           scrollTrigger: {
             trigger: card,
-            start: "top bottom-=170",
+            start: "top bottom-=150",
             toggleActions: "play none none none"
           }
         });
       });
     }, containerRef);
+
     return () => ctx.revert();
   }, []);
+
   const cards = [
     {
       badge: "01",
@@ -68,12 +81,13 @@ export default function HorizontalScroll() {
       glass: true
     }
   ];
+
   return (
     <section ref={containerRef} className={styles.container}>
       {cards.map((card, i) => (
         <div
           key={i}
-          ref={el => (cardsRef.current[i] = el)}
+          ref={setCardRef(i)}
           className={styles.cardWrapper}
         >
           <Card
@@ -85,4 +99,3 @@ export default function HorizontalScroll() {
     </section>
   );
 }
-

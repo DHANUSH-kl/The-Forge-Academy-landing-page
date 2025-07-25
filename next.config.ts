@@ -1,9 +1,9 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  experimental: {
-    appDir: true,
-  },
-  optimizeFonts: true,
-};
+  /** @type {import('next').NextConfig} */
+  const nextConfig = {
+    experimental: {
+      appDir: true,
+    },
+    optimizeFonts: true,
+  };
 
-module.exports = nextConfig;
+  module.exports = nextConfig;

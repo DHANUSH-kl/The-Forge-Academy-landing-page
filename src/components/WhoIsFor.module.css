@@ -2,8 +2,34 @@
   padding: 8rem 2rem;
   border-top: 0.5px solid rgba(255, 255, 255, 0.1);
   border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  min-height: 100vh;
+  width: 100%;
+  position: relative;
+  overflow-y: auto;
 }
 
+.scroll-stack-card {
+  transition: transform 0.3s ease-out, filter 0.3s ease-out;
+  will-change: transform, filter;
+}
+
+.scroll-indicator {
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.5);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 1000;
+}
+
+/* Existing styles */
 .content {
   max-width: 800px;
   margin: 0 auto;
@@ -24,4 +50,9 @@
 .bullet:last-child {
   margin-bottom: 0;
   font-weight: 400;
+}
+
+.heading {
+  width: 100%;
+  margin-left: 10rem;
 }

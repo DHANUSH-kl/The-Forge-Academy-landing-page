@@ -4,8 +4,6 @@ import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ThreeDMarquee } from '../components/ui/3d-marquee';
-import  ShinyText  from '../components/ui/ShinyText';
-import TextGenerateEffect from '../components/ui/typewriter'
 import styles from './Hero.module.css';
 
 export default function Hero() {

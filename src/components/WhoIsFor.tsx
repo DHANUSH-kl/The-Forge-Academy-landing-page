@@ -1,21 +1,49 @@
+'use client';
+
 import styles from './WhoIsFor.module.css';
+import { HoverEffect } from "./ui/card-hover-effect"
+
+
+export const projects = [
+
+  {
+    title: "Students who are tired of theory and want hands-on experience"
+  },
+   {
+    title: "Aspiring entrepreneurs who want to build without risking money"
+  },
+   {
+    title: "Creators, marketers, designers, and hustlers looking to explore startup roles"
+  },
+   {
+    title: "People who learn best by doing, not just watching"
+  }
+
+]
 
 export default function WhoIsFor() {
-  const bullets = [
-    "Students tired of theory, craving hands-on experience.",
-    "Aspiring entrepreneurs who want to build—not just learn.",
-    "Creators, marketers, designers, hustlers seeking real startup roles.",
-    "People who learn by doing, not watching.",
-    "This is not a course. It's your first business, first failure, first win."
-  ];
 
+
+ 
   return (
+    <>
     <section className={styles.container}>
-      <div className={styles.content}>
-        {bullets.map((bullet, i) => (
-          <p key={i} className={styles.bullet}>{bullet}</p>
-        ))}
-      </div>
+
+      <h1 className=' text-center text-3xl md:text-4xl lg:text-5xl font-bold px-5 sm:px-10 md:px-15 lg:px-20 py-5 md:py-8 lg:py-10'>
+      Who it&apos;s for
+      </h1>
+
+     
+    <div className="max-w-5xl mx-auto px-8">
+      <HoverEffect items={projects} />
+    </div>
+
+    
+ 
     </section>
+
+      
+
+    </>
   );
 }

@@ -1,7 +1,7 @@
 import  {NavbarDemo}  from '../components/Navbar';
 import Hero from '../components/Hero';
 import HorizontalScroll from '../components/HorizontalScroll';
-import Timeline from '../components/Timeline';
+import TimelineCmp from '../components/TimelineCmp';
 import WhoIsFor from '../components/WhoIsFor';
 import CTA from '../components/CTA';
 
@@ -11,8 +11,8 @@ export default function Home() {
       <NavbarDemo />
       <Hero />
       <HorizontalScroll />
-      <Timeline />
       <WhoIsFor />
+      <TimelineCmp />
       <CTA />
     </main>
   );

@@ -196,21 +196,3 @@
     font-size: 1rem;
   }
 }
-
-
-
-
-
-
-
-
-
-
-.timeline {
-  position: relative;
-  cursor: none;
-}
-
-.timeline * {
-  cursor: none !important;
-}

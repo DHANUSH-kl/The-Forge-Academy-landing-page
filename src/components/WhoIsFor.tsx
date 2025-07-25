@@ -7,16 +7,25 @@ import { HoverEffect } from "./ui/card-hover-effect"
 export const projects = [
 
   {
-    title: "Students who are tired of theory and want hands-on experience"
+    title: "Students who are tired of theory and want hands-on experience",
+    description:"",
+    link:""
+
   },
    {
-    title: "Aspiring entrepreneurs who want to build without risking money"
+    title: "Aspiring entrepreneurs who want to build without risking money",
+    description:"",
+    link:""
   },
    {
-    title: "Creators, marketers, designers, and hustlers looking to explore startup roles"
+    title: "Creators, marketers, designers, and hustlers looking to explore startup roles",
+    description:"",
+    link:""
   },
    {
-    title: "People who learn best by doing, not just watching"
+    title: "People who learn best by doing, not just watching",
+    description:"",
+    link:""
   }
 
 ]
@@ -35,7 +44,11 @@ export default function WhoIsFor() {
 
      
     <div className="max-w-5xl mx-auto px-8">
-      <HoverEffect items={projects} />
+     <HoverEffect items={projects.map(proj => ({
+        title: proj.title,
+        description: proj.description || '', // Add default if needed
+        link: proj.link || '#' // Add default if needed
+}))} />
     </div>
 
     

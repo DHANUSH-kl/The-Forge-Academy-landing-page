@@ -179,6 +179,7 @@ RetroEffect.displayName = 'RetroEffect';
 
 // Interface for Wave Uniforms
 interface WaveUniforms {
+    [uniform: string]: THREE.IUniform<unknown>; 
   time: THREE.IUniform<number>;
   resolution: THREE.IUniform<THREE.Vector2>;
   waveSpeed: THREE.IUniform<number>;

@@ -1,7 +1,5 @@
 'use client';
 
-
-/* eslint-disable react/no-unknown-property */
 import { useRef, useEffect, forwardRef } from "react";
 import { Canvas, useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
@@ -138,9 +136,9 @@ void mainImage(in vec4 inputColor, in vec2 uv, out vec4 outputColor) {
 `;
 
 class RetroEffectImpl extends Effect {
-  public uniforms: Map<string, THREE.Uniform<any>>;
+  public uniforms: Map<string, THREE.IUniform<number>>;
   constructor() {
-    const uniforms = new Map<string, THREE.Uniform<any>>([
+    const uniforms = new Map<string, THREE.IUniform<number>>([
       ["colorNum", new THREE.Uniform(4.0)],
       ["pixelSize", new THREE.Uniform(2.0)],
     ]);
@@ -175,16 +173,16 @@ const RetroEffect = forwardRef<
 RetroEffect.displayName = "RetroEffect";
 
 interface WaveUniforms {
-  [key: string]: THREE.Uniform<any>;
-  time: THREE.Uniform<number>;
-  resolution: THREE.Uniform<THREE.Vector2>;
-  waveSpeed: THREE.Uniform<number>;
-  waveFrequency: THREE.Uniform<number>;
-  waveAmplitude: THREE.Uniform<number>;
-  waveColor: THREE.Uniform<THREE.Color>;
-  mousePos: THREE.Uniform<THREE.Vector2>;
-  enableMouseInteraction: THREE.Uniform<number>;
-  mouseRadius: THREE.Uniform<number>;
+  [key: string]: THREE.IUniform<any>;
+  time: THREE.IUniform<number>;
+  resolution: THREE.IUniform<THREE.Vector2>;
+  waveSpeed: THREE.IUniform<number>;
+  waveFrequency: THREE.IUniform<number>;
+  waveAmplitude: THREE.IUniform<number>;
+  waveColor: THREE.IUniform<THREE.Color>;
+  mousePos: THREE.IUniform<THREE.Vector2>;
+  enableMouseInteraction: THREE.IUniform<number>;
+  mouseRadius: THREE.IUniform<number>;
 }
 
 interface DitheredWavesProps {
@@ -324,11 +322,14 @@ export default function Dither({
   enableMouseInteraction = true,
   mouseRadius = 1,
 }: DitherProps) {
+  // Initialize devicePixelRatio safely
+  const dpr = typeof window !== 'undefined' ? window.devicePixelRatio : 1;
+
   return (
     <Canvas
       className="dither-container"
       camera={{ position: [0, 0, 6] }}
-      dpr={window.devicePixelRatio}
+      dpr={dpr} // Use the safe value here
       gl={{ antialias: true, preserveDrawingBuffer: true }}
     >
       <DitheredWaves

@@ -98,7 +98,7 @@ const BlurText: React.FC<BlurTextProps> = ({
     <p
       ref={ref}
       className={className}
-      style={{ display: 'flex', flexWrap: 'wrap',justifyContent: 'center' }}
+      style={{ display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}
     >
       {elements.map((segment, index) => {
         const animateKeyframes = buildKeyframes(fromSnapshot, toSnapshots);
@@ -107,8 +107,8 @@ const BlurText: React.FC<BlurTextProps> = ({
           duration: totalDuration,
           times,
           delay: (index * delay) / 1000,
+          ease: easing, // Moved easing directly into Transition
         };
-        (spanTransition as any).ease = easing;
 
         return (
           <motion.span

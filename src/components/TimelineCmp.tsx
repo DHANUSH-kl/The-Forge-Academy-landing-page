@@ -112,7 +112,7 @@ export default function TimelineCmp() {
             Knowledge Grill
           </h3>
           <p className="text-neutral-300 md:text-lg">
-            Before you take action, you'll go through a 3-day crash course—just enough to start confidently, not endlessly.
+            Before you take action, you&apos;ll go through a 3-day crash course—just enough to start confidently, not endlessly.
           </p>
         </div>
       )
@@ -138,7 +138,7 @@ export default function TimelineCmp() {
             Weekly Role Rotations
           </h3>
           <p className="text-neutral-300 md:text-lg">
-            Every 7 days, you'll switch your role. Marketing this week, sales the next, and operations after that.
+            Every 7 days, you&apos;ll switch your role. Marketing this week, sales the next, and operations after that.
           </p>
         </div>
       )

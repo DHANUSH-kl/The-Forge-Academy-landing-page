@@ -3,7 +3,12 @@ import { motion, useMotionTemplate, useMotionValue } from 'framer-motion';
 import styles from './WhoIsFor.module.css';
 import BlurText from "./BlurText";
 
-const items = [
+interface CardItem {
+  category: string;
+  highlights: string[];
+}
+
+const items: CardItem[] = [
   {
     category: "Students tired of theory",
     highlights: [
@@ -72,7 +77,7 @@ export default function WhoIsFor() {
   );
 }
 
-function Card({ item, index }: { item: any, index: number }) {
+function Card({ item, index }: { item: CardItem, index: number }) {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
   const background = useMotionTemplate`radial-gradient(240px at ${mouseX}px ${mouseY}px, rgba(255,255,255,0.1), transparent)`;

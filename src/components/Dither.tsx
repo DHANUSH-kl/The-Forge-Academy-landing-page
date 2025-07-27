@@ -5,6 +5,7 @@ import { Canvas, useFrame, useThree, ThreeEvent } from "@react-three/fiber";
 import { EffectComposer, wrapEffect } from "@react-three/postprocessing";
 import { Effect } from "postprocessing";
 import * as THREE from "three";
+import type { MutableRefObject } from 'react';
 
 const waveVertexShader = `
 precision highp float;
@@ -134,10 +135,10 @@ void mainImage(in vec4 inputColor, in vec2 uv, out vec4 outputColor) {
 `;
 
 class RetroEffectImpl extends Effect {
-  public uniforms: Map<string, THREE.IUniform>;
+  public uniforms: Map<string, THREE.Uniform>;
 
   constructor() {
-    const uniforms = new Map<string, THREE.IUniform>([
+    const uniforms = new Map<string, THREE.Uniform>([
       ['colorNum', new THREE.Uniform(4.0)],
       ['pixelSize', new THREE.Uniform(2.0)],
     ]);

@@ -12,7 +12,7 @@ export default function Hero() {
   const failureTextRef = useRef<HTMLSpanElement>(null);
   const subheadlineRef = useRef<HTMLParagraphElement>(null);
 
-   const images = [
+  const images = [
     "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
     "https://assets.aceternity.com/animated-modal.png",
     "https://assets.aceternity.com/animated-testimonials.webp",
@@ -49,28 +49,22 @@ export default function Hero() {
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
-    // Fix mobile viewport height issues
     const setVH = () => {
       const vh = window.innerHeight * 0.01;
       document.documentElement.style.setProperty('--vh', `${vh}px`);
     };
 
     setVH();
-    window.addEventListener('resize', setVH);
-    window.addEventListener('orientationchange', () => {
-      setTimeout(setVH, 100);
-    });
+    
+    const handleResize = () => {
+      setVH();
+      ScrollTrigger.refresh();
+    };
+
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('orientationchange', handleResize);
 
     const ctx = gsap.context(() => {
-      if (!failureTextRef.current) return;
-
-      // Force set the initial state to white
-      gsap.set(failureTextRef.current, {
-        color: '#ffffff',
-        display: 'inline',
-        opacity: 1,
-      });
-
       gsap.from([headlineRef.current, subheadlineRef.current], {
         opacity: 0,
         y: 40,
@@ -79,88 +73,21 @@ export default function Hero() {
         ease: 'power3.out',
       });
 
-      gsap.from(failureTextRef.current, {
-        opacity: 0,
-        y: 20,
-        duration: 1.4,
-        ease: 'power3.out',
-        delay: 0.2,
-      });
-
-      // Add a longer delay and force refresh for mobile
-      gsap.delayedCall(0.5, () => {
-        ScrollTrigger.create({
-          trigger: containerRef.current,
-          start: () => {
-            // Calculate based on actual window height, not vh units
-            const windowHeight = window.innerHeight;
-            const triggerPoint = windowHeight * 0.07; // 93% from bottom = 7% from top
-            return `bottom ${windowHeight - triggerPoint}px`;
-          },
-          end: 'bottom center',
-          markers: false,
-          onEnter: () => {
-            console.log('ScrollTrigger: onEnter');
-            gsap.to(failureTextRef.current, {
-              color: '#ff0000',
-              duration: 0.2,
-              ease: 'power1.out',
-            });
-          },
-          onLeaveBack: () => {
-            console.log('ScrollTrigger: onLeaveBack');
-            gsap.to(failureTextRef.current, {
-              color: '#ffffff',
-              duration: 0.2,
-              ease: 'power1.out',
-            });
-          },
-          onRefresh: () => {
-            gsap.set(failureTextRef.current, {
-              color: '#ffffff',
-            });
-          },
-          refreshPriority: -1,
-          invalidateOnRefresh: true,
-          anticipatePin: 1,
-          fastScrollEnd: true,
+      if (failureTextRef.current) {
+        gsap.from(failureTextRef.current, {
+          opacity: 0,
+          y: 20,
+          duration: 1.4,
+          ease: 'power3.out',
+          delay: 0.2,
         });
-
-        ScrollTrigger.refresh();
-      });
-
-      const handleResize = () => {
-        setTimeout(() => {
-          ScrollTrigger.refresh();
-          gsap.set(failureTextRef.current, {
-            color: '#ffffff',
-          });
-        }, 100);
-      };
-
-      const handleOrientationChange = () => {
-        setTimeout(() => {
-          setVH();
-          ScrollTrigger.refresh();
-          gsap.set(failureTextRef.current, {
-            color: '#ffffff',
-          });
-        }, 200);
-      };
-
-      window.addEventListener('resize', handleResize);
-      window.addEventListener('orientationchange', handleOrientationChange);
-      
-      return () => {
-        window.removeEventListener('resize', handleResize);
-        window.removeEventListener('orientationchange', handleOrientationChange);
-      };
+      }
     }, containerRef);
 
     return () => {
       ctx.revert();
-      window.removeEventListener('resize', setVH);
-      window.removeEventListener('orientationchange', setVH);
+      window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
     };
   }, []);
 
@@ -173,11 +100,7 @@ export default function Hero() {
       <div className={styles.content}>
         <h1 ref={headlineRef} className={styles.headline}>
           The Only Academy Where{' '}
-          <span
-            ref={failureTextRef}
-            className={styles.failureWord}
-            style={{ color: '#ffffff' }}
-          >
+          <span ref={failureTextRef} className={styles.failureWord}>
             Failure
           </span>{' '}
           is Mandatory

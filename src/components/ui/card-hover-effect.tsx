@@ -1,6 +1,6 @@
+'use client';
 import { cn } from "@/lib/utils";
-import { AnimatePresence, motion } from "motion/react";
-
+import { AnimatePresence, motion } from "framer-motion";
 import { useState } from "react";
 
 export const HoverEffect = ({
@@ -19,7 +19,7 @@ export const HoverEffect = ({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 md:grid-cols-2  lg:grid-cols-2  py-10 cursor-pointer",
+        "grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6",
         className
       )}
     >
@@ -27,14 +27,14 @@ export const HoverEffect = ({
         <a
           href={item?.link}
           key={item?.link}
-          className="relative group  block p-2 h-full w-full"
+          className="relative group block p-2 h-full w-full"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
           <AnimatePresence>
             {hoveredIndex === idx && (
               <motion.span
-                className="absolute inset-0 h-full w-full bg-neutral-200 dark:bg-slate-800/[0.8] block  rounded-3xl"
+                className="absolute inset-0 h-full w-full bg-gradient-to-br from-red-900/20 to-red-500/10 block rounded-xl"
                 layoutId="hoverBackground"
                 initial={{ opacity: 0 }}
                 animate={{
@@ -68,16 +68,17 @@ export const Card = ({
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        "rounded-xl h-full w-full p-6 overflow-hidden bg-black/70 border border-white/10 backdrop-blur-sm group-hover:border-red-400/30 relative z-20 transition-all duration-300",
         className
       )}
     >
       <div className="relative z-50">
-        <div className="p-4">{children}</div>
+        <div className="p-2">{children}</div>
       </div>
     </div>
   );
 };
+
 export const CardTitle = ({
   className,
   children,
@@ -86,11 +87,12 @@ export const CardTitle = ({
   children: React.ReactNode;
 }) => {
   return (
-    <h4 className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}>
+    <h4 className={cn("text-white font-bold text-lg md:text-xl tracking-wide mb-3", className)}>
       {children}
     </h4>
   );
 };
+
 export const CardDescription = ({
   className,
   children,
@@ -101,7 +103,7 @@ export const CardDescription = ({
   return (
     <p
       className={cn(
-        "mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm",
+        "text-gray-300 tracking-wide leading-relaxed text-sm md:text-base",
         className
       )}
     >

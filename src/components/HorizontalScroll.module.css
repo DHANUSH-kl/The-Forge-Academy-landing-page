@@ -1,43 +1,92 @@
-/* components/HorizontalScroll.module.css */
 .container {
-  display: flex;
-  width: 100vw; /* Changed from max-content to 100vw */
-  height: 100vh;
+  width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
   background: #000;
+  padding: 2rem 5vw;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  padding: 0 10vw;
-  gap: 4rem;
-  overflow-x: hidden; /* Explicitly hide horizontal overflow */
-  overflow-y: visible; /* Allow vertical overflow if needed */
-  position: relative; /* Add positioning context */
+}
+
+.heading {
+  width: 100%;
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 0 1rem;
+}
+
+.blurText {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+  line-height: 1.1;
+  margin: 0 auto;
+  display: inline-block;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
 .cardWrapper {
-  flex-shrink: 0;
-  height: 100%;
+  width: 100%;
   display: flex;
-  align-items: center;
-  width: 380px; /* Set explicit width to match card */
+  justify-content: center;
 }
 
 .card {
-  width: 380px;
+  width: 100%;
+  max-width: 380px;
   height: 480px;
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
+/* Tablet */
+@media (min-width: 768px) {
   .container {
-    padding: 0 5vw;
-    gap: 2rem;
+    padding: 4rem 5vw;
   }
   
-  .cardWrapper {
-    width: 300px; /* Match mobile card width */
+  .grid {
+    gap: 3rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .heading {
+    margin-bottom: 4rem;
+  }
+}
+
+/* Desktop */
+@media (min-width: 1024px) {
+  .container {
+    padding: 5rem 5vw;
+    justify-content: center;
+  }
+  
+  .grid {
+    gap: 4rem;
   }
   
   .card {
-    width: 300px;
-    height: 400px;
+    height: 500px;
+  }
+}
+
+/* Large Desktop */
+@media (min-width: 1440px) {
+  .container {
+    padding: 6rem 5vw;
+  }
+  
+  .grid {
+    max-width: 1400px;
   }
 }

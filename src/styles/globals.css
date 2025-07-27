@@ -6,6 +6,7 @@
   font-display: swap;
 }
 
+
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-rgb: 0, 0, 0;
@@ -126,4 +127,21 @@ body {
       transform: translateZ(0) rotate(360deg);
     }
   }
+}
+
+
+
+
+
+
+
+
+
+
+/* Glassmorphism effect */
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+.bg-opacity-10 {
+  background-color: rgba(255, 255, 255, 0.1);
 }

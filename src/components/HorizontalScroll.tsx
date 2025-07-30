@@ -48,32 +48,39 @@ export default function HorizontalScroll() {
     return () => ctx.revert();
   }, []);
 
-  const cards = [
-    {
-      badge: "01",
-      title: "Business Impact",
-      description: "Real equity and revenue impact in live startups",
-      glass: true
-    },
-    {
-      badge: "02",
-      title: "Founder Role Rotation",
-      description: "Weekly cycles through CEO, CMO, and CTO roles",
-      glass: true
-    },
-    {
-      badge: "03",
-      title: "Equity-Based Participation",
-      description: "Earn ownership in ventures you help build",
-      glass: true
-    },
-    {
-      badge: "04",
-      title: "Operational Execution",
-      description: "Hands-on implementation from day one",
-      glass: true
-    }
-  ];
+const cards = [
+  {
+    badge: "01",
+    title: "Run Real Companies",
+    description: "Not case studies — you’ll lead real projects with real stakes like you’re the CEO",
+    glass: true
+  },
+  {
+    badge: "02",
+    title: "Earn Equity as You Learn",
+    description: "Get rewarded with startup equity based on how you think, act and execute",
+    glass: true
+  },
+  {
+    badge: "03",
+    title: "Switch Roles Weekly",
+    description: "From product to marketing to ops — rotate across departments and find your zone of genius",
+    glass: true
+  },
+  {
+    badge: "04",
+    title: "Get Mentored by Founders",
+    description: "Work under real entrepreneurs who tell you what actually works, not textbook theory",
+    glass: true
+  },
+  {
+    badge: "05",
+    title: "Track Progress Like a Game",
+    description: "Level up, earn rewards and rise through the ranks with our gamified platform (Coming Soon)",
+    glass: true
+  }
+];
+
 
   return (
     <section ref={containerRef} className={styles.container}>
@@ -98,6 +105,6 @@ export default function HorizontalScroll() {
           </div>
         ))}
       </div>
-    </section>
+    </section>  
   );
 }

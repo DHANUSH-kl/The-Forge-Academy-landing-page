@@ -57,12 +57,6 @@ export const GlassmorphicWaitlist = () => {
         createdAt: serverTimestamp(),
       });
 
-      // await fetch('/api/send-waitlist-email', {
-      //   method: 'POST',
-      //   body: JSON.stringify({ email }),
-      //   headers: { 'Content-Type': 'application/json' },
-      // });
-
       setAlreadyJoined(false);
       setSubmitted(true);
       setEmail('');
@@ -114,7 +108,7 @@ export const GlassmorphicWaitlist = () => {
                     }}
                     className="mt-4 inline-block px-6 py-3 text-sm font-medium text-black bg-white rounded-xl hover:bg-white/90 transition-all"
                   >
-                   Take 60 seconds to boost your priority access
+                    Take 60 seconds to boost your priority access
                   </button>
                 )}
               </div>

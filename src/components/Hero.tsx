@@ -18,23 +18,23 @@ export default function Hero() {
     "https://assets.aceternity.com/animated-testimonials.webp",
     "https://assets.aceternity.com/cloudinary_bkp/Tooltip_luwy44.png",
     "https://assets.aceternity.com/github-globe.png",
-    "https://assets.aceternity.com/glare-card.png",
-    "https://assets.aceternity.com/layout-grid.png",
+    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745886/u6apnlolefiyfjm3i54k.png",  //main 
+    "https://assets.aceternity.com/layout-grid.png",  // main
     "https://assets.aceternity.com/flip-text.png",
     "https://assets.aceternity.com/hero-highlight.png",
     "https://assets.aceternity.com/carousel.webp",
     "https://assets.aceternity.com/placeholders-and-vanish-input.png",
     "https://assets.aceternity.com/shooting-stars-and-stars-background.png",
     "https://assets.aceternity.com/signup-form.png",
-    "https://assets.aceternity.com/cloudinary_bkp/stars_sxle3d.png",
-    "https://assets.aceternity.com/spotlight-new.webp",
-    "https://assets.aceternity.com/cloudinary_bkp/Spotlight_ar5jpr.png",
+    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745331/ps9bfdwwhbv4sqv283j6.png",  // main img
+    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753746263/tow9iacne3kb3zkjwbix.png",  // mainn   
+    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753746917/s9xndbvttxm9p4xpijvq.png", // main  
     "https://assets.aceternity.com/cloudinary_bkp/Parallax_Scroll_pzlatw_anfkh7.png",
     "https://assets.aceternity.com/tabs.png",
     "https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png",
-    "https://assets.aceternity.com/cloudinary_bkp/typewriter-effect.png",
-    "https://assets.aceternity.com/glowing-effect.webp",
-    "https://assets.aceternity.com/hover-border-gradient.png",
+    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745331/ps9bfdwwhbv4sqv283j6.png",
+    "https://assets.aceternity.com/glowing-effect.webp",  //main 
+    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745886/u6apnlolefiyfjm3i54k.png",  // 2nd  
     "https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png",
     "https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png",
     "https://assets.aceternity.com/macbook-scroll.png",

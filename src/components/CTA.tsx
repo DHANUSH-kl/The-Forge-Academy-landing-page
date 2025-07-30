@@ -1,5 +1,6 @@
 import styles from './CTA.module.css';
 import Silk from './Silk';
+import Link from 'next/link';
 
 export default function CTA() {
   return (
@@ -19,7 +20,9 @@ export default function CTA() {
       <div className={styles.content}>
         <h2 className={styles.title}>You&apos;ve Been <span>Chosen</span>.</h2>
         <p className={styles.subtitle}>The academy picks hustlers ready to join, fall, and build for real.</p>
-        <button className={styles.applyButton}>Apply to Enter</button>
+         <Link href="/apply" className={styles.applyButton}>
+          Apply to Enter
+        </Link>
       </div>
     </section>
   );

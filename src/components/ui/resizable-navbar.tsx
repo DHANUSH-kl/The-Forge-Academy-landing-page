@@ -234,15 +234,13 @@ export const NavbarLogo = () => {
   return (
     <a
       href="#"
-      className="relative z-20 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
+      className="relative z-100 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <img
-        src="https://assets.aceternity.com/logo-dark.png"
+        src="https://res.cloudinary.com/dpohmoogk/image/upload/v1753743706/lq3luz9kviin3rzymouz.png"
         alt="logo"
-        width={30}
-        height={30}
+           className="h-12 w-12 object-contain rounded-xl" 
       />
-      <span className="font-medium text-black dark:text-white">Startup</span>
     </a>
   );
 };

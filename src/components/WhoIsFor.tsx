@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef } from "react";
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
+import Link from "next/link";
 
 interface CardItem {
   category: string;
@@ -127,10 +128,12 @@ export default function WhoIsFor() {
           whileInView={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
         >
+          <Link href="/apply" >
           <div className="inline-flex items-center gap-4 px-8 py-4 border border-white/20 rounded-sm hover:border-white/40 transition-colors duration-500 cursor-pointer group">
             <span className="text-white/80 font-light tracking-wider text-sm uppercase">Begin Assessment</span>
             <div className="w-6 h-px bg-white/60 group-hover:w-8 transition-all duration-300" />
           </div>
+          </Link>
         </motion.div>
       </div>
     </section>

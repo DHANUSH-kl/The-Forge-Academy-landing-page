@@ -1,6 +1,5 @@
 .hero {
-  height: 100vh; /* Fallback */
-  height: 100dvh;
+  height: 70vh; /* Fallback */
   min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;
@@ -72,6 +71,7 @@
 @media (min-width: 768px) {
   .hero {
     padding: 0 2rem;
+    height: 100vh;
   }
   .content {
     padding: 0 3rem;
@@ -85,6 +85,7 @@
 @media (min-width: 1024px) {
   .hero {
     padding: 0 4rem;
+    height: 100vh;
   }
   .content {
     padding: 0;

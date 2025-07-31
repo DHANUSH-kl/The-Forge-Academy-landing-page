@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useRef, useEffect } from "react";
 import { motion, useMotionTemplate, useMotionValue, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 
 interface FeatureItem {
   badge: string;
@@ -584,6 +585,8 @@ export default function WhatWeDo() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.8 }}
         >
+
+            <Link href="/apply">
           <div className="inline-flex items-center gap-4 px-8 py-4 border border-white/20 hover:border-white/40 transition-all duration-500 cursor-pointer group">
             <span className="text-white/80 font-light tracking-wider text-sm uppercase">
               Experience the Future
@@ -594,6 +597,7 @@ export default function WhatWeDo() {
               transition={{ duration: 0.3 }}
             />
           </div>
+          </Link>
         </motion.div>
       </div>
     </section>

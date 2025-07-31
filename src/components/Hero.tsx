@@ -106,9 +106,10 @@ export default function Hero() {
           is Mandatory
         </h1>
 
-        <p ref={subheadlineRef} className={styles.subheadline}>
-          Real teams. Real clients. Real equity. This is how founders are forged.
-        </p>
+       <p ref={subheadlineRef} className={styles.subheadline}>
+        Real teams. Real clients. Real equity.<br />
+        This is how founders are forged.
+      </p>
       </div>
     </section>
   );

@@ -1,6 +1,7 @@
 "use client";
 import { cn } from "@/lib/utils";
 import { IconMenu2, IconX } from "@tabler/icons-react";
+import Link from "next/link";
 import {
   motion,
   AnimatePresence,
@@ -69,7 +70,7 @@ export const Navbar = ({ children, className }: NavbarProps) => {
     <motion.div
       ref={ref}
       // IMPORTANT: Change this to class of `fixed` if you want the navbar to be fixed
-      className={cn("fixed inset-x-0 top-10 z-40 w-full", className)}
+      className={cn("fixed inset-x-0 top-10 z-[9999] w-full", className)}
     >
       {React.Children.map(children, (child) =>
         React.isValidElement(child)
@@ -232,16 +233,16 @@ export const MobileNavToggle = ({
 
 export const NavbarLogo = () => {
   return (
-    <a
-      href="#"
+   <Link
+      href="/"
       className="relative z-100 mr-4 flex items-center space-x-2 px-2 py-1 text-sm font-normal text-black"
     >
       <img
         src="https://res.cloudinary.com/dpohmoogk/image/upload/v1753743706/lq3luz9kviin3rzymouz.png"
         alt="logo"
-           className="h-12 w-12 object-contain rounded-xl" 
+        className="h-12 w-12 object-contain rounded-xl"
       />
-    </a>
+    </Link>
   );
 };
 

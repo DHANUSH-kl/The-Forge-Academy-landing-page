@@ -37,7 +37,6 @@
   position: relative;
   z-index: 1;
   color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
   max-width: 1200px;
   margin: 0 auto;
   width: 100%;
@@ -50,19 +49,23 @@
   line-height: 1.1;
   margin-bottom: 1.5rem;
   letter-spacing: -0.02em;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .failureWord {
-  color: rgb(193, 10, 10);
-  font-weight: 600;
+  color: #dc2626;
+  font-weight: 700;
 }
 
 .subheadline {
-  font-size: clamp(1rem, 3vw, 1.25rem);
-  opacity: 0.9;
+  font-size: clamp(1.1rem, 3vw, 1.4rem);
+  color: rgba(255, 255, 255, 0.85);
   margin-bottom: 2rem;
-  line-height: 1.6;
+  line-height: 1.5;
   max-width: 600px;
+  font-weight: 300;
+  letter-spacing: 0.01em;
 }
 
 /* Tablet */

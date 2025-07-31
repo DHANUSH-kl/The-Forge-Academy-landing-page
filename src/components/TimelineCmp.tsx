@@ -61,7 +61,7 @@ export default function TimelineCmp() {
           ease: "power2.inOut",
           scrollTrigger: {
             trigger: containerRef.current,
-            start: "top center",
+            start:  "top 90%",
             end: "bottom center",
             scrub: 1
           }

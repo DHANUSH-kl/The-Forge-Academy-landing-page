@@ -1,5 +1,5 @@
 // import  {NavbarDemo}  from '../components/Navbar';
-import Hero from '../components/Hero';
+import {Hero} from '../components/Hero';
 import WhatWeDo from '../components/WhatWeDo';
 import TimelineCmp from '../components/TimelineCmp';
 import WhoIsFor from '../components/WhoIsFor';

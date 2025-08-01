@@ -1,115 +1,90 @@
 'use client';
 
-import { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { ThreeDMarquee } from '../components/ui/3d-marquee';
-import styles from './Hero.module.css';
+import React from "react";
+import { motion } from "framer-motion";
+import Dither from "./Dither";
+import Link from "next/link";
 
-export default function Hero() {
-  const containerRef = useRef<HTMLDivElement>(null);
-  const headlineRef = useRef<HTMLHeadingElement>(null);
-  const failureTextRef = useRef<HTMLSpanElement>(null);
-  const subheadlineRef = useRef<HTMLParagraphElement>(null);
-
-  const images = [
-    "https://assets.aceternity.com/cloudinary_bkp/3d-card.png",
-    "https://assets.aceternity.com/animated-modal.png",
-    "https://assets.aceternity.com/animated-testimonials.webp",
-    "https://assets.aceternity.com/cloudinary_bkp/Tooltip_luwy44.png",
-    "https://assets.aceternity.com/github-globe.png",
-    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745886/u6apnlolefiyfjm3i54k.png",  //main 
-    "https://assets.aceternity.com/layout-grid.png",  // main
-    "https://assets.aceternity.com/flip-text.png",
-    "https://assets.aceternity.com/hero-highlight.png",
-    "https://assets.aceternity.com/carousel.webp",
-    "https://assets.aceternity.com/placeholders-and-vanish-input.png",
-    "https://assets.aceternity.com/shooting-stars-and-stars-background.png",
-    "https://assets.aceternity.com/signup-form.png",
-    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745331/ps9bfdwwhbv4sqv283j6.png",  // main img
-    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753746263/tow9iacne3kb3zkjwbix.png",  // mainn   
-    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753746917/s9xndbvttxm9p4xpijvq.png", // main  
-    "https://assets.aceternity.com/cloudinary_bkp/Parallax_Scroll_pzlatw_anfkh7.png",
-    "https://assets.aceternity.com/tabs.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Tracing_Beam_npujte.png",
-    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745331/ps9bfdwwhbv4sqv283j6.png",
-    "https://assets.aceternity.com/glowing-effect.webp",  //main 
-    "https://res.cloudinary.com/dpohmoogk/image/upload/v1753745886/u6apnlolefiyfjm3i54k.png",  // 2nd  
-    "https://assets.aceternity.com/cloudinary_bkp/Infinite_Moving_Cards_evhzur.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Lamp_hlq3ln.png",
-    "https://assets.aceternity.com/macbook-scroll.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Meteors_fye3ys.png",
-    "https://assets.aceternity.com/cloudinary_bkp/Moving_Border_yn78lv.png",
-    "https://assets.aceternity.com/multi-step-loader.png",
-    "https://assets.aceternity.com/vortex.png",
-    "https://assets.aceternity.com/wobble-card.png",
-    "https://assets.aceternity.com/world-map.webp",
-  ];
-
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    const setVH = () => {
-      const vh = window.innerHeight * 0.01;
-      document.documentElement.style.setProperty('--vh', `${vh}px`);
-    };
-
-    setVH();
-    
-    const handleResize = () => {
-      setVH();
-      ScrollTrigger.refresh();
-    };
-
-    window.addEventListener('resize', handleResize);
-    window.addEventListener('orientationchange', handleResize);
-
-    const ctx = gsap.context(() => {
-      gsap.from([headlineRef.current, subheadlineRef.current], {
-        opacity: 0,
-        y: 40,
-        duration: 1.4,
-        stagger: 0.15,
-        ease: 'power3.out',
-      });
-
-      if (failureTextRef.current) {
-        gsap.from(failureTextRef.current, {
-          opacity: 0,
-          y: 20,
-          duration: 1.4,
-          ease: 'power3.out',
-          delay: 0.2,
-        });
-      }
-    }, containerRef);
-
-    return () => {
-      ctx.revert();
-      window.removeEventListener('resize', handleResize);
-      window.removeEventListener('orientationchange', handleResize);
-    };
-  }, []);
-
+export function Hero() {
   return (
-    <section ref={containerRef} className={styles.hero}>
-      <div className={styles.marqueeContainer}>
-        <ThreeDMarquee images={images} />
+    <section className="relative min-h-screen overflow-hidden bg-black text-white">
+      {/* Background */}
+      <div className="absolute inset-0 z-0">
+        <Dither
+          waveColor={[0.5, 0.5, 0.5]}
+          disableAnimation={false}
+          enableMouseInteraction={true}
+          mouseRadius={0.3}
+          colorNum={4}
+          waveAmplitude={0.3}
+          waveFrequency={3}
+          waveSpeed={0.05}
+        />
       </div>
 
-      <div className={styles.content}>
-        <h1 ref={headlineRef} className={styles.headline}>
-          The Only Academy Where{' '}
-          <span ref={failureTextRef} className={styles.failureWord}>
-            Failure
-          </span>{' '}
-          is Mandatory
-        </h1>
+      {/* Content */}
+      <div className="relative z-10 flex items-center min-h-screen px-6 sm:px-12">
+        <div className="max-w-full text-left">
+          {/* Tagline */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5, delay: 0.1 }}
+            className="mb-6"
+          >
+            <div className="inline-block bg-white/10 backdrop-blur-sm border border-white/20 rounded-full px-5 py-1.5">
+              <span className="text-xs sm:text-sm font-medium tracking-widest uppercase text-white/90">
+                Founder&apos;s Journey
+              </span>
+            </div>
+          </motion.div>
 
-       <p ref={subheadlineRef} className={styles.subheadline}>
-        Real teams. Real clients. Real equity.<br />
-        This is how founders are forged.
-      </p>
+          {/* Headline */}
+          <motion.h1
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.2 }}
+            className="text-4xl sm:text-6xl md:text-7xl font-extrabold leading-[1.15] tracking-tight mb-6"
+          >
+            The Only Academy Where <br className="hidden md:block" />
+            <span className="inline-block text-white">Failure is Mandatory</span>
+          </motion.h1>
+
+          {/* Subtext */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.3 }}
+            className="mb-10 space-y-2"
+          >
+            <p className="text-lg sm:text-xl font-medium text-white">
+              Real teams. Real clients. Real equity.
+            </p>
+            <p className="text-base sm:text-lg text-white/80 font-normal">
+              This is how founders are forged.
+            </p>
+          </motion.div>
+
+          {/* CTA Buttons */}
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex flex-col sm:flex-row gap-4"
+          >
+            <Link href="/apply">
+              <button className="px-6 py-3 bg-white text-black font-semibold text-sm sm:text-base rounded-full hover:bg-white/90 transition-all duration-300">
+                Apply
+              </button>
+            </Link>
+            <button
+              onClick={() => window.dispatchEvent(new Event("open-waitlist"))}
+              className="px-6 py-3 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-semibold text-sm sm:text-base rounded-full hover:bg-white/20 hover:border-white/30 transition-all duration-300"
+            >
+              Join Waitlist
+            </button>
+          </motion.div>
+        </div>
       </div>
     </section>
   );

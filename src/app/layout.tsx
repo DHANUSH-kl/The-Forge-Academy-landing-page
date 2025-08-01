@@ -5,9 +5,12 @@ import  {NavbarDemo}  from '../components/Navbar';
 
 
 
-export const metadata: Metadata = {
-  title: 'THE FORGED ACADEMY',
-  description: 'Where failure is mandatory',
+export const metadata = {
+  title: "The Forge Academy",
+  description: "Official Site of The Forge Academy",
+  icons: {
+    icon: "/favicon.png", // or .png
+  },
 };
 
 export default function RootLayout({

@@ -37,7 +37,7 @@ export async function sendWaitlistEmail(userEmail: string) {
 
           <br/>
 
-          <p>–<br/>Founder<br/>The Forge Academy</p>
+          <p>–<br/>Ashish (Founder)<br/>The Forge Academy</p>
         </div>
       `,
     });

@@ -9,7 +9,7 @@ export const metadata = {
   title: "The Forge Academy",
   description: "Official Site of The Forge Academy",
   icons: {
-    icon: "/favicon.png", // or .png
+    icon: "/favicon2.png", // or .png
   },
 };
 

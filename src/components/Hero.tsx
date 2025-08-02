@@ -5,7 +5,6 @@ import { motion } from "framer-motion";
 import Link from "next/link";
 import Beams from "./Beams"; // Ensure this path is correct
 import ShinyText from './ShinyText';
-import { HoverBorderGradient } from "../ui/hover-border-gradient";
 
 export function Hero() {
   return (

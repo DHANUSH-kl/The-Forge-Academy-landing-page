@@ -7,9 +7,9 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendWaitlistEmail(userEmail: string) {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'THE FORGE ACADEMY <team@theforgeacademy.in>',
+      from: '<team@theforgeacademy.in>',
       to: [userEmail],
-      subject: 'Your Future Just Got Locked In',
+      subject: 'hey there ',
       html: `
         <div style="font-family: sans-serif; font-size: 16px; color: #000;">
           
@@ -18,21 +18,7 @@ export async function sendWaitlistEmail(userEmail: string) {
 
           <p>You just secured your seat.</p>
 
-          <p>The Forge Academy is about to launch. You’ll be among the first to move when it does.</p>
-
-          <p>This isn’t another list. You’re now part of the earliest circle — where business is built by doing, not watching.</p>
-
-          <p>Save this for launch:</p>
-
-          <p style="font-size: 18px; font-weight: bold; margin: 12px 0;">TFA12 – 12% for those who didn’t wait.</p>
-
-          <p style="font-size: 14px; color: #555;">(Works after we open.)</p>
-
-          <p>Stay alert. You’ll know when it’s time.</p>
-
-          <br/>
-
-          <p>–<br/>Founder<br/>The Forge Academy</p>
+         
         </div>
       `,
     });

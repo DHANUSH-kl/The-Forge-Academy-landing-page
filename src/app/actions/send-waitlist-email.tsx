@@ -29,7 +29,7 @@ export async function sendWaitlistEmail(userEmail: string) {
 
           <p>Here’s your first reward for something you truly deserve for making this bold step:</p>
 
-          <p style="font-size: 18px; font-weight: bold; margin: 12px 0;">TFA12 — for 12% off</p>
+          <p style="font-size: 18px; font-weight: bold; margin: 12px 0;">TFA12 — for 12%</p>
 
           <p style="font-size: 14px; color: #555;">(Valid only after our launch.)</p>
 

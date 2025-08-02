@@ -7,18 +7,21 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendWaitlistEmail(userEmail: string) {
   try {
     const { data, error } = await resend.emails.send({
-      from: '<team@theforgeacademy.in>',
+      from: 'THE FORGE<team@theforgeacademy.in>',
       to: [userEmail],
-      subject: 'hey there ',
+      subject: 'Your Future Just Got Locked In',
       html: `
         <div style="font-family: sans-serif; font-size: 16px; color: #000;">
-          
+          Hi,
 
-          <p>Hey,</p>
+  You've been added to The Forge Academy early waitlist.
 
-          <p>You just secured your seat.</p>
+  We're excited to share more soon. You'll be the first to know when we launch.
 
-         
+  Save this early access code for later: TFA12
+
+  Thanks for joining us.
+
         </div>
       `,
     });

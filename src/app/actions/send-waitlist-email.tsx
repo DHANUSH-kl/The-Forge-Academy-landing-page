@@ -7,7 +7,7 @@ const resend = new Resend(process.env.RESEND_API_KEY);
 export async function sendWaitlistEmail(userEmail: string) {
   try {
     const { data, error } = await resend.emails.send({
-      from: 'Ashish (Founder) <team@theforgeacademy.in>',
+      from: 'THE FORGE ACADEMY <team@theforgeacademy.in>',
       to: [userEmail],
       subject: 'Your Future Just Got Locked In',
       html: `

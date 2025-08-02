@@ -12,12 +12,7 @@ export async function sendWaitlistEmail(userEmail: string) {
       subject: 'Your Future Just Got Locked In',
       html: `
         <div style="font-family: sans-serif; font-size: 16px; color: #000;">
-          <img 
-            src="https://res.cloudinary.com/di4nynvj6/image/upload/v1753975612/TheForgeAcademy/Waiting_list_email_card_fc69ut.png" 
-            alt="Welcome to The Forge Academy" 
-            width="100%" 
-            style="max-width: 600px; margin-bottom: 20px;" 
-          />
+          
 
           <p>Hey,</p>
 
@@ -37,7 +32,7 @@ export async function sendWaitlistEmail(userEmail: string) {
 
           <br/>
 
-          <p>–<br/>Ashish (Founder)<br/>The Forge Academy</p>
+          <p>–<br/>Founder<br/>The Forge Academy</p>
         </div>
       `,
     });

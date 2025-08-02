@@ -29,19 +29,13 @@ export async function sendWaitlistEmail(userEmail: string) {
 
           <p>Here’s your first reward for something you truly deserve for making this bold step:</p>
 
-          <p style="font-size: 18px; font-weight: bold; margin: 12px 0;">TFA12 — for 12%</p>
+          <p style="font-size: 18px; font-weight: bold; margin: 12px 0;">TFA12 — 12% early supporter benefit</p>
 
           <p style="font-size: 14px; color: #555;">(Valid only after our launch.)</p>
 
           <p>When the doors open, you’ll be ahead of everyone else. Until then, stay sharp, stay ready. The future isn’t waiting — and neither should you.</p>
 
           <p>Welcome to the next level.</p>
-
-          <p>
-            —<br />
-            The Forge Academy Team<br />
-            <a href="https://www.theforgeacademy.in">www.theforgeacademy.in</a>
-          </p>
         </div>
       `,
     });

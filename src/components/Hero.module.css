@@ -1,5 +1,5 @@
 .hero {
-  height: 70vh; /* Fallback */
+  min-height: 70vh; /* Fallback */
   min-height: -webkit-fill-available;
   display: flex;
   flex-direction: column;

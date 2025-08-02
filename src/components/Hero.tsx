@@ -4,6 +4,8 @@ import React from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import Beams from "./Beams"; // Ensure this path is correct
+import ShinyText from './ShinyText';
+import { HoverBorderGradient } from "../ui/hover-border-gradient";
 
 export function Hero() {
   return (
@@ -12,11 +14,11 @@ export function Hero() {
       <div className="absolute inset-0 z-0">
         <Beams
           beamWidth={3}
-          beamHeight={15}
+          beamHeight={13}
           beamNumber={10}
           lightColor="#ffffff"
-          speed={1}
-          noiseIntensity={1.85}
+          speed={5}
+          noiseIntensity={2}
           scale={0.25}
           rotation={25}
         />
@@ -48,8 +50,16 @@ export function Hero() {
             style={{ fontFamily: '"Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif' }}
           >
             The Only Academy Where <br className="hidden sm:block" />
+
+            <button
+              className=" sm:w-auto px-5 py-2  sm:px-3 sm:py-3 md:px-8 md:py-4 bg-white/10 backdrop-blur-sm border border-white/20 text-white font-black text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl leading-[1.1] sm:leading-[1.15] tracking-tight mb-3 sm:mb-4 md:mb-6 rounded-full hover:border-white/30 transition-all duration-300 mr-2 sm:mr-3 mt-2 sm:mt-3"
+            >
+              <ShinyText text="Failure" disabled={false} speed={2} className="custom-class" />
+            </button>
+
+
             <span className="inline-block text-white bg-gradient-to-r from-white to-gray-200 bg-clip-text text-transparent">
-              Failure is Mandatory
+              is Mandatory
             </span>
           </motion.h1>
 

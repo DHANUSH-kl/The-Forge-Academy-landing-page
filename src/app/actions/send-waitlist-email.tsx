@@ -26,7 +26,7 @@ export async function sendWaitlistEmail(userEmail: string) {
 
   <p>
     For launch, here’s something to keep: <br/>
-    <span style="font-size: 18px; font-weight: bold; margin: 12px 0; display:inline-block;">TFA12</span><br/>
+    <span style="font-size: 18px; font-weight: bold; margin: 12px 0; display:inline-block;">TFA12 — 12% Early Access Bonus</span><br/>
     (This can be used for a special advantage once we open.)
   </p>
 

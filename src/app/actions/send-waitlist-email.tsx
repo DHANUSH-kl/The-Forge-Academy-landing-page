@@ -12,11 +12,36 @@ export async function sendWaitlistEmail(userEmail: string) {
       subject: 'Welcome to The Forge Waitlist!',
       html: `
         <div style="font-family: sans-serif; font-size: 16px; color: #000;">
-      <p>Hey Dhanush,</p>
-      <p>You’ve made it to the waitlist! Thanks for joining early.</p>
-      <p>If you have any questions or want to share what you’re excited to learn, just hit reply. I read every response personally.</p>
-      <p>Excited for launch,<br/>Dhanu<br/>Founder,<br/>The Forge Academy</p>
-    </div>
+  <img 
+    src="https://res.cloudinary.com/di4nynvj6/image/upload/v1753975612/TheForgeAcademy/Waiting_list_email_card_fc69ut.png" 
+    alt="Welcome to The Forge Academy" 
+    width="100%" 
+    style="max-width: 600px; margin-bottom: 20px;" 
+  />
+
+  
+  <p>Hey</p>
+
+  <p>
+    You’ve secured your spot on The Forge Academy’s waitlist. We’re building something special—by and for people who want to <strong>create, learn, and lead</strong> from day one.
+  </p>
+
+  <p>
+    When we launch, you’ll be in the first circle to hear from us. I’d love to know: <em>What are you hoping to create or learn with us?</em> Just hit reply—your feedback shapes what we build next.
+  </p>
+
+  <p>
+    For launch, here’s something to keep: <br/>
+    <span style="font-size: 18px; font-weight: bold; margin: 12px 0; display:inline-block;">TFA12</span><br/>
+    (This can be used for a special advantage once we open.)
+  </p>
+
+  <p style="font-size: 14px; color: #555;">If this lands outside your main inbox, drag it to Primary and add me to your contacts—then you’ll never miss an update.</p>
+
+  <br/>
+
+ 
+</div>
       `,
     });
 

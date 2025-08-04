@@ -13,14 +13,15 @@ export async function sendWaitlistEmail(userEmail: string) {
       html: `
         <div style="font-family: sans-serif; font-size: 16px; color: #000;">
       
-         <img 
-            src="https://res.cloudinary.com/di4nynvj6/image/upload/v1754297242/IMG_1817_1_1_pksgaz.jpg" 
-            alt="The Forge Academy" 
-            style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 24px;" 
-          />
-        
+          <p>Hey</p>
 
-  <p>Hey</p>
+          <p style="margin-top: -8px;">Just wanted to say thank you for joining us early. You're in.</p>
+
+          <img 
+  src="https://theforgeacademy.in/images/invite.jpg" 
+  alt="The Forge Academy Invitation"
+  style="width: 100%; max-width: 600px; border-radius: 12px; margin: 24px 0;"
+/>
 
   <p>
     You’ve secured your spot on The Forge Academy’s waitlist. We’re building something special—by and for people who want to <strong>create, learn, and lead</strong> from day one.

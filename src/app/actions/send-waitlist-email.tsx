@@ -12,7 +12,12 @@ export async function sendWaitlistEmail(userEmail: string) {
       subject: 'Welcome to The Forge Waitlist!',
       html: `
         <div style="font-family: sans-serif; font-size: 16px; color: #000;">
-  
+      
+         <img 
+            src="https://res.cloudinary.com/di4nynvj6/image/upload/v1754297242/IMG_1817_1_1_pksgaz.jpg" 
+            alt="The Forge Academy" 
+            style="width: 100%; max-width: 600px; border-radius: 8px; margin-bottom: 24px;" 
+          />
         
 
   <p>Hey</p>

@@ -73,7 +73,7 @@ export function Hero() {
               Real teams. Real clients. Real equity.
             </p>
             <p className="text-xs sm:text-base lg:text-lg text-white/80 font-normal leading-relaxed">
-              This is how founders are forged.
+              WE MAKE YOU KNOWN
             </p>
           </motion.div>
 

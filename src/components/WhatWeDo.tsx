@@ -560,7 +560,7 @@ export default function WhatWeDo() {
           <BlurText
             text="WHAT WE DO"
             delay={0}
-            className="text-6xl md:text-7xl lg:text-9xl font-light text-white mb-16 tracking-[-0.02em] leading-none"
+            className="text-7xl md:text-7xl lg:text-9xl font-light text-white mb-16 tracking-[-0.02em] leading-none"
           />
 
           <motion.div

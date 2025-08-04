@@ -73,7 +73,7 @@ export function Hero() {
               Real teams. Real clients. Real equity.
             </p>
             <p className="text-xs sm:text-base lg:text-lg text-white/80 font-normal leading-relaxed">
-              WE MAKE YOU KNOWN
+              We Make You Know
             </p>
           </motion.div>
 

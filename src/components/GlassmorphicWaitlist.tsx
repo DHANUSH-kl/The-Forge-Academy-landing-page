@@ -2,9 +2,10 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X } from 'lucide-react';
+import { X, MailCheck, MoveRight, CheckCircle2 } from 'lucide-react';
+
 import { db } from '../lib/firebase';
-import {sendWaitlistEmail} from '../app/actions/send-waitlist-email';
+import { sendWaitlistEmail } from '../app/actions/send-waitlist-email';
 import {
   collection,
   addDoc,
@@ -14,13 +15,14 @@ import {
   getDocs,
 } from 'firebase/firestore';
 
+
 export const GlassmorphicWaitlist = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
   const [isValid, setIsValid] = useState(true);
   const [submitted, setSubmitted] = useState(false);
   const [alreadyJoined, setAlreadyJoined] = useState(false);
-  const [isLoading, setIsLoading] = useState(false); // New loading state
+  const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
     const openPopup = () => setIsOpen(true);
@@ -38,97 +40,212 @@ export const GlassmorphicWaitlist = () => {
     return re.test(email);
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const isValidEmail = validateEmail(email);
-    setIsValid(isValidEmail);
-    if (!isValidEmail) return;
+const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+  e.preventDefault();
+  const isValidEmail = validateEmail(email);
+  setIsValid(isValidEmail);
+  if (!isValidEmail) return;
 
-    setIsLoading(true); // Start loading
+  setIsLoading(true);
 
-    try {
-      const q = query(collection(db, 'waitlist'), where('email', '==', email));
-      const querySnapshot = await getDocs(q);
+  try {
+    const q = query(collection(db, 'waitlist'), where('email', '==', email));
+    const querySnapshot = await getDocs(q);
 
-      if (!querySnapshot.empty) {
-        setAlreadyJoined(true);
-        setSubmitted(true);
-        return;
-      }
-
-      await addDoc(collection(db, 'waitlist'), {
-        email,
-        createdAt: serverTimestamp(),
-      });
-      console.log('Calling Resend for:', email);
-      await sendWaitlistEmail(email);
-      console.log('Resend called');
-
-      setAlreadyJoined(false);
+    if (!querySnapshot.empty) {
+      setAlreadyJoined(true);
       setSubmitted(true);
-      setEmail('');
-    } catch (error) {
-      console.error('Error:', error);
-      // You might want to show an error message to the user here
-    } finally {
-      setIsLoading(false); // Stop loading regardless of success or failure
+      return;
     }
-  };
+
+    // ✅ THIS is where addDoc is used to create the document
+    await addDoc(collection(db, 'waitlist'), {
+      email,
+      createdAt: serverTimestamp(),
+    });
+
+    await sendWaitlistEmail(email); // optional if using Resend
+    setAlreadyJoined(false);
+    setSubmitted(true);
+    setEmail('');
+  } catch (error) {
+    console.error('Error:', error);
+  } finally {
+    setIsLoading(false);
+  }
+};
+
 
   return (
     <AnimatePresence>
       {isOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm">
           <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="relative w-full max-w-md rounded-2xl overflow-hidden border border-white/10"
+            initial={{ opacity: 0, scale: 0.95, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.95, y: -20 }}
+            transition={{ type: "spring", duration: 0.5 }}
+            className="relative w-full max-w-md rounded-3xl overflow-hidden border border-white/15"
             style={{
-              background: 'linear-gradient(145deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01))',
-              backdropFilter: 'blur(36px)',
+              background: 'linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))',
+              backdropFilter: 'blur(32px)',
               boxShadow:
-                '0 0 0 1px rgba(255,255,255,0.08), 0 25px 40px -10px rgba(0,0,0,0.4)',
+                '0 0 0 1px rgba(255,255,255,0.08), 0 24px 48px -12px rgba(0,0,0,0.4)',
             }}
           >
             <button
               onClick={() => setIsOpen(false)}
-              className="absolute top-5 right-5 z-10 p-1.5 rounded-full bg-white/5 hover:bg-white/10 transition-all"
+              className="absolute top-4 right-4 z-10 p-2 rounded-full bg-white/10 hover:bg-white/20 transition-all backdrop-blur-sm"
             >
-              <X className="w-5 h-5 text-white/80 hover:text-white" />
+              <X className="w-4 h-4 text-white/80 hover:text-white" />
             </button>
 
             {submitted ? (
-              <div className="p-10 text-center text-white space-y-4">
-                <h2 className="text-2xl font-semibold">
-                  {alreadyJoined
-                    ? 'Already on the waitlist'
-                    : 'Thanks for joining'}
-                </h2>
-                <p className="text-white/60">
-                  {alreadyJoined
-                    ? 'This email is already registered.'
-                    : "We'll notify you with early access."}
-                </p>
-
-                {!alreadyJoined && (
-                  <button
-                    onClick={() => {
-                      window.location.href = '/apply';
-                    }}
-                    className="mt-4 inline-block px-6 py-3 text-sm font-medium text-black bg-white rounded-xl hover:bg-white/90 transition-all"
+              alreadyJoined ? (
+                <div className="p-8 sm:p-10 text-center text-white space-y-6">
+                  <motion.div 
+                    initial={{ scale: 0.8, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ type: 'spring', stiffness: 200 }}
+                    className="inline-flex items-center justify-center w-20 h-20 bg-gradient-to-br from-amber-400/20 to-orange-500/20 rounded-full mb-4 border border-amber-400/30"
                   >
-                    Take 60 seconds to boost your priority access
-                  </button>
-                )}
-              </div>
+                    <CheckCircle2 className="w-8 h-8 text-amber-400" />
+                  </motion.div>
+                  <h2 className="text-2xl font-semibold">Already on the waitlist</h2>
+                  <p className="text-white/60">This email is already registered.</p>
+                </div>
+              ) : (
+                <div className="relative">
+                  {/* Subtle background glow */}
+                  <div className="absolute inset-0 overflow-hidden rounded-3xl">
+                    <motion.div
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 0.1 }}
+                      transition={{ duration: 1 }}
+                      className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-r from-blue-500/20 to-purple-500/20 rounded-full blur-3xl"
+                    />
+                  </div>
+
+                  <div className="p-8 sm:p-10 text-white relative z-10">
+                    {/* Success Icon and Content */}
+                    <div className="text-center mb-8">
+                      <motion.div 
+                        initial={{ scale: 0.8, opacity: 0 }}
+                        animate={{ scale: 1, opacity: 1 }}
+                        transition={{ 
+                          type: 'spring', 
+                          stiffness: 120, 
+                          damping: 15,
+                          delay: 0.1 
+                        }}
+                        className="relative inline-flex items-center justify-center w-16 h-16 mb-6"
+                      >
+                        <div className="absolute inset-0 bg-green-500/10 rounded-full border border-green-500/25" />
+                        <motion.div
+                          initial={{ scale: 0 }}
+                          animate={{ scale: 1 }}
+                          transition={{ delay: 0.3, type: 'spring', stiffness: 200 }}
+                        >
+                          <MailCheck className="w-7 h-7 text-green-400" />
+                        </motion.div>
+                      </motion.div>
+
+                      <motion.h2 
+                        initial={{ y: 15, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.4 }}
+                        className="text-2xl font-semibold mb-3 text-white tracking-tight"
+                      >
+                        You&apos;re In!
+                      </motion.h2>
+                      
+                      <motion.div
+                        initial={{ y: 15, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ delay: 0.6 }}
+                        className="space-y-2"
+                      >
+                        <p className="text-white/75 leading-relaxed">
+                          An exclusive 12% promo code is waiting in your inbox
+                        </p>
+                      </motion.div>
+                    </div>
+
+                    {/* Delivery Information */}
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.8 }}
+                      className="bg-white/[0.03] border border-white/10 rounded-xl p-5 mb-6 backdrop-blur-sm"
+                    >
+                      <div className="flex gap-3">
+                        <div className="flex-shrink-0 mt-0.5">
+                          <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" className="text-white/70">
+                              <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 8V12" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                              <path d="M12 16H12.01" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                            </svg>
+                          </div>
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-medium text-white text-sm mb-2">Heads up</h3>
+                          <p className="text-sm text-white/65 leading-relaxed mb-3">
+                            The email might land in Promotions or Spam.
+                          </p>
+                          
+                          <div className="space-y-2">
+                            {[
+                              "Mark it as 'Not Spam'",
+                              "Reply 'I'm in' to unlock full access"
+                            ].map((item, index) => (
+                              <motion.div
+                                key={index}
+                                initial={{ opacity: 0, x: -10 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 1 + index * 0.1 }}
+                                className="flex items-start gap-2"
+                              >
+                                <div className="w-1.5 h-1.5 rounded-full bg-white/50 mt-1.5 flex-shrink-0" />
+                                <span className="text-sm text-white/70 leading-relaxed">{item}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* Action Button */}
+                    <motion.button
+                      onClick={() => setIsOpen(false)}
+                      initial={{ opacity: 0, y: 15 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1.4 }}
+                      whileHover={{ scale: 1.01 }}
+                      whileTap={{ scale: 0.99 }}
+                      className="w-full relative group"
+                    >
+                      <div className="px-5 py-3 bg-white/8 hover:bg-white/12 text-white font-medium rounded-lg border border-white/15 hover:border-white/25 transition-all duration-200 backdrop-blur-sm flex items-center justify-center gap-2">
+                        <span className="text-sm">Got it, I&apos;ll check my email</span>
+                        <motion.div
+                          initial={{ x: 0 }}
+                          whileHover={{ x: 2 }}
+                          transition={{ type: 'spring', stiffness: 400, damping: 25 }}
+                        >
+                          <MoveRight className="w-4 h-4 text-white/80" />
+                        </motion.div>
+                      </div>
+                    </motion.button>
+                  </div>
+                </div>
+              )
             ) : (
-              <form onSubmit={handleSubmit} className="p-10 space-y-6">
-                <div className="space-y-3">
-                  <h2 className="text-3xl font-light text-white text-center">
+              <div className="p-6 sm:p-8 space-y-5">
+                <div className="space-y-2 text-center">
+                  <h2 className="text-2xl font-semibold text-white">
                     Exclusive Access
                   </h2>
-                  <p className="text-white/60 text-center text-lg">
+                  <p className="text-white/60 text-base">
                     Claim your exclusive launch promo code
                   </p>
                 </div>
@@ -147,11 +264,11 @@ export const GlassmorphicWaitlist = () => {
                       if (e.target.value === '') setIsValid(true);
                     }}
                     placeholder="Enter email"
-                    className={`w-full px-5 py-3.5 bg-white/5 rounded-xl focus:outline-none text-white placeholder-white/30 text-base ${
-                      !isValid ? 'border-red-400/50' : 'border-white/15'
-                    } border`}
+                    className={`w-full px-4 py-3 bg-white/5 rounded-lg focus:outline-none text-white placeholder-white/40 text-base ${
+                      !isValid ? 'border-red-400/50' : 'border-white/20'
+                    } border focus:border-blue-400/50 transition-all`}
                     required
-                    disabled={isLoading} // Disable input while loading
+                    disabled={isLoading}
                   />
                   {!isValid && (
                     <motion.p
@@ -168,22 +285,22 @@ export const GlassmorphicWaitlist = () => {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ delay: 0.3 }}
-                  className="pt-2"
+                  className="pt-1"
                 >
                   <motion.button
                     type="submit"
-                    disabled={isLoading} // Disable button while loading
-                    whileHover={!isLoading ? { y: -2 } : {}} // Only animate if not loading
-                    whileTap={!isLoading ? { y: 1, transition: { duration: 0.1 } } : {}} // Only animate if not loading
+                    disabled={isLoading}
+                    onClick={handleSubmit}
+                    whileHover={!isLoading ? { y: -1, scale: 1.01 } : {}}
+                    whileTap={!isLoading ? { y: 1, scale: 0.99 } : {}}
                     className={`w-full relative overflow-hidden group ${
                       isLoading ? 'cursor-not-allowed opacity-80' : ''
                     }`}
                   >
-                    <div className="px-6 py-3.5 bg-white text-black font-medium rounded-xl relative z-10 flex items-center justify-center gap-2">
+                    <div className="px-5 py-3 bg-white text-black font-medium rounded-lg relative z-10 flex items-center justify-center gap-2">
                       {isLoading ? (
                         <>
                           <span>Joining waitlist...</span>
-                          {/* Loading spinner */}
                           <motion.div
                             animate={{ rotate: 360 }}
                             transition={{
@@ -198,12 +315,12 @@ export const GlassmorphicWaitlist = () => {
                         <>
                           <span>Join Waitlist</span>
                           <motion.svg
-                            width="18"
-                            height="18"
+                            width="16"
+                            height="16"
                             viewBox="0 0 24 24"
                             fill="none"
                             initial={{ x: 0 }}
-                            animate={{ x: email ? 4 : 0 }}
+                            animate={{ x: email ? 3 : 0 }}
                             transition={{ type: 'spring', stiffness: 500 }}
                           >
                             <path
@@ -219,7 +336,7 @@ export const GlassmorphicWaitlist = () => {
                     </div>
                     {!isLoading && (
                       <>
-                        <div className="absolute inset-0 rounded-xl overflow-hidden">
+                        <div className="absolute inset-0 rounded-lg overflow-hidden">
                           <motion.div
                             initial={{ x: '-100%' }}
                             whileHover={{ x: '100%' }}
@@ -230,13 +347,13 @@ export const GlassmorphicWaitlist = () => {
                         <motion.div
                           initial={{ opacity: 0 }}
                           whileTap={{ opacity: 0.1 }}
-                          className="absolute inset-0 bg-black rounded-xl"
+                          className="absolute inset-0 bg-black rounded-lg"
                         />
                       </>
                     )}
                   </motion.button>
                 </motion.div>
-              </form>
+              </div>
             )}
           </motion.div>
         </div>

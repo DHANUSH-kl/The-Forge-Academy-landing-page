@@ -15,7 +15,6 @@ import {
   getDocs,
 } from 'firebase/firestore';
 
-
 export const GlassmorphicWaitlist = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [email, setEmail] = useState('');
@@ -40,41 +39,39 @@ export const GlassmorphicWaitlist = () => {
     return re.test(email);
   };
 
-const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-  e.preventDefault();
-  const isValidEmail = validateEmail(email);
-  setIsValid(isValidEmail);
-  if (!isValidEmail) return;
+  const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    const isValidEmail = validateEmail(email);
+    setIsValid(isValidEmail);
+    if (!isValidEmail) return;
 
-  setIsLoading(true);
+    setIsLoading(true);
 
-  try {
-    const q = query(collection(db, 'waitlist'), where('email', '==', email));
-    const querySnapshot = await getDocs(q);
+    try {
+      const q = query(collection(db, 'waitlist'), where('email', '==', email));
+      const querySnapshot = await getDocs(q);
 
-    if (!querySnapshot.empty) {
-      setAlreadyJoined(true);
+      if (!querySnapshot.empty) {
+        setAlreadyJoined(true);
+        setSubmitted(true);
+        return;
+      }
+
+      await addDoc(collection(db, 'waitlist'), {
+        email,
+        createdAt: serverTimestamp(),
+      });
+
+      await sendWaitlistEmail(email);
+      setAlreadyJoined(false);
       setSubmitted(true);
-      return;
+      setEmail('');
+    } catch (error) {
+      console.error('Error:', error);
+    } finally {
+      setIsLoading(false);
     }
-
-    // ✅ THIS is where addDoc is used to create the document
-    await addDoc(collection(db, 'waitlist'), {
-      email,
-      createdAt: serverTimestamp(),
-    });
-
-    await sendWaitlistEmail(email); // optional if using Resend
-    setAlreadyJoined(false);
-    setSubmitted(true);
-    setEmail('');
-  } catch (error) {
-    console.error('Error:', error);
-  } finally {
-    setIsLoading(false);
-  }
-};
-
+  };
 
   return (
     <AnimatePresence>
@@ -116,7 +113,6 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
                 </div>
               ) : (
                 <div className="relative">
-                  {/* Subtle background glow */}
                   <div className="absolute inset-0 overflow-hidden rounded-3xl">
                     <motion.div
                       initial={{ opacity: 0 }}
@@ -127,17 +123,11 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
                   </div>
 
                   <div className="p-8 sm:p-10 text-white relative z-10">
-                    {/* Success Icon and Content */}
                     <div className="text-center mb-8">
                       <motion.div 
                         initial={{ scale: 0.8, opacity: 0 }}
                         animate={{ scale: 1, opacity: 1 }}
-                        transition={{ 
-                          type: 'spring', 
-                          stiffness: 120, 
-                          damping: 15,
-                          delay: 0.1 
-                        }}
+                        transition={{ type: 'spring', stiffness: 120, damping: 15, delay: 0.1 }}
                         className="relative inline-flex items-center justify-center w-16 h-16 mb-6"
                       >
                         <div className="absolute inset-0 bg-green-500/10 rounded-full border border-green-500/25" />
@@ -171,7 +161,6 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
                       </motion.div>
                     </div>
 
-                    {/* Delivery Information */}
                     <motion.div
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -215,9 +204,11 @@ const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
                       </div>
                     </motion.div>
 
-                    {/* Action Button */}
                     <motion.button
-                      onClick={() => setIsOpen(false)}
+                      onClick={() => {
+                        setIsOpen(false);
+                        window.open('https://mail.google.com/', '_blank');
+                      }}
                       initial={{ opacity: 0, y: 15 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 1.4 }}
